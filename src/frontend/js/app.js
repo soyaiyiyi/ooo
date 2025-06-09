@@ -333,10 +333,10 @@ const App = {
 
         // 添加账号
         async handleAddAccount() {
-            // if (!this.orderForm.site) {
-            //     this.$message.error('请先识别网站');
-            //     return;
-            // }
+            if (!this.orderForm.site) {
+                this.$message.error('请先识别网站');
+                return;
+            }
 
             try {
                 this.isLoadingNetworkRequests = true;
@@ -345,8 +345,7 @@ const App = {
                 this.networkRequests = [];
 
                 // 打开账号窗口
-                const result = await window.pywebview.api.open_account_window('https://supplier.hongyuzhifu.com');
-                // const result = await window.pywebview.api.open_account_window(this.orderForm.site);
+                const result = await window.pywebview.api.open_account_window(this.orderForm.site);
                 if (!result.success) {
                     this.$message.error(result.message || '打开账号窗口失败');
                 }

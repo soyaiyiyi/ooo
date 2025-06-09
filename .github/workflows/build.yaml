@@ -38,7 +38,7 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          pyinstaller --noconfirm --onefile --windowed --clean --uac-admin --icon=resources/app_icon.ico --name "幻影" --add-data "resources;resources" main.py
+          pyinstaller --noconfirm --onefile --windowed --clean --uac-admin --icon=resources/icon.ico --name "幻影" main.py
 
       - name: Archive artifact
         uses: actions/upload-artifact@v4
