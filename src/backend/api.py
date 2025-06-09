@@ -346,7 +346,6 @@ class API:
             if self.account_window:
                 self.account_window.destroy()
 
-            # 仅在开发环境下使用持久化cookies和localStorage
             window_params = {
                 "title": "添加账号",
                 "url": url,
@@ -356,50 +355,8 @@ class API:
                 "resizable": True,
             }
 
-            # 仅在调试模式下加载和保存会话状态
-            if self.config.debug_mode:
-                logger.info("开发环境: 启用账号窗口会话持久化")
-
-                # 检查是否有保存的cookies
-                saved_cookies = self.config.get_config().get("webview_cookies", {})
-                logger.info(f"从配置中获取到已保存的cookies: {saved_cookies}")
-
-                # 如果存在保存的cookie则使用
-                if saved_cookies:
-                    window_params["cookies"] = saved_cookies
-
-                # 创建加载完成处理函数，包含恢复localStorage的脚本
-                def on_loaded():
-                    # 注入监控脚本
-                    self.account_window.evaluate_js(js_monitor)
-
-                    # 恢复本地存储数据
-                    restore_js = """
-                    try {
-                        // 恢复localStorage数据
-                        const storedData = %s;
-                        if (storedData) {
-                            for (const key in storedData) {
-                                localStorage.setItem(key, storedData[key]);
-                                console.log('【开发模式】恢复localStorage数据:', key);
-                            }
-                        }
-                        console.log('【开发模式】本地存储数据恢复完成');
-                    } catch(e) {
-                        console.error('恢复本地存储数据失败:', e);
-                    }
-                    """ % json.dumps(
-                        self.config.get_config().get("webview_localstorage", {})
-                    )
-
-                    self.account_window.evaluate_js(restore_js)
-
-            else:
-                logger.info("生产环境: 不启用账号窗口会话持久化")
-
-                # 在生产环境下，只注入监控脚本
-                def on_loaded():
-                    self.account_window.evaluate_js(js_monitor)
+            def on_loaded():
+                self.account_window.evaluate_js(js_monitor)
 
             # 创建窗口
             self.account_window = webview.create_window(**window_params)

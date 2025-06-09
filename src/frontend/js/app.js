@@ -465,7 +465,6 @@ const App = {
 
         },
         async loginSuccess() {
-
            const res = await window.pywebview.api.get_info();
            this.userInfo = res
            console.log('%c🤪 ~ file: /Users/soya/Desktop/getorder_python_gui/src/frontend/js/app.js:469 [] -> res : ', 'color: #f57db2', res);
