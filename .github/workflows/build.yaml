@@ -34,15 +34,11 @@ jobs:
           echo ${{matrix.asset_name}}-${{env.GITHUB_REF_SLUG}}.zip
       - name: get dependencies
         run: |
-          pip install readchar
-          git clone https://github.com/pyinstaller/pyinstaller.git
-          cd pyinstaller/bootloader
-          python waf configure
-          python waf all
-          cd ..
-          python setup.py install
-          cd ..
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pip install -r requirements.txt
           python -m PyInstaller main.py --hidden-import readchar -i resources/icon.ico -n "幻影"
+          
       - name: Create Archive
         uses: papeloto/action-zip@v1
         with:
