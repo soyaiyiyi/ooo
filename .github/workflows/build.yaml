@@ -22,34 +22,32 @@ jobs:
           #   asset_name: main-macos-amd64
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Set up Python
-        uses: actions/setup-python@v2
-      - name: Inject slug/short variables
-        uses: rlespinasse/github-slug-action@v3.x
-      - name: info
-        run: |
-          echo ${{matrix.artifact_name}}
-          echo ${{matrix.os}}
-          echo ${{matrix.asset_name}}-${{env.GITHUB_REF_SLUG}}.zip
-      - name: get dependencies
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pyinstaller
           pip install -r requirements.txt
-          python -m PyInstaller main.py --hidden-import readchar -i resources/icon.ico -n "幻影"
-          
-      - name: Create Archive
-        uses: papeloto/action-zip@v1
+          pip install pyinstaller
+
+      - name: Build with PyInstaller
+        run: |
+          pyinstaller --noconfirm --onefile --windowed --clean --uac-admin --icon=resources/app_icon.ico --name "幻影" --add-data "resources;resources" main.py
+
+      - name: Archive artifact
+        uses: actions/upload-artifact@v4
         with:
-          dest: ${{matrix.artifact_name}}
-          files: dist/main/
-      - name: Upload file
-        uses: svenstaro/upload-release-action@v2
+          name: 幻影
+          path: dist/幻影.exe
+
+      - name: Create Release and Upload Assets
+        uses: softprops/action-gh-release@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{matrix.artifact_name}}
-          asset_name: ${{format('{0}-{1}.zip',matrix.asset_name,env.GITHUB_REF_SLUG)}}
-          tag: ${{github.ref}}
-          overwrite: true
-          body: "Release of simple pyInstaller binary, version ${{env.GITHUB_REF_SLUG}}"
+          files: |
+            dist/*.exe
