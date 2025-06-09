@@ -1,0 +1,24 @@
+[project]
+name = "getorder-python-gui"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1.1",
+    "pillow>=11.2.1",
+    "pyinstaller>=6.14.1",
+    "pyobjc-core>=11.0",
+    "pyobjc-framework-cocoa>=11.0",
+    "pyobjc-framework-quartz>=11.0",
+    "pyobjc-framework-security>=11.0",
+    "pyobjc-framework-webkit>=11.0",
+    "pyqt6>=6.9.1",
+    "pyqtwebengine>=5.15.7",
+    "pystray>=0.19.5",
+    "python-dotenv>=1.1.0",
+    "pywebview>=5.4",
+    "qtpy>=2.4.3",
+    "requests>=2.32.3",
+    "watchdog>=6.0.0",
+]

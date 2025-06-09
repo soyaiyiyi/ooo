@@ -1,0 +1,330 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f5f7fa;
+    color: #303133;
+}
+
+/* 布局样式 */
+.el-header {
+    background-color: #409EFF;
+    color: white;
+    line-height: 60px;
+    padding: 0 20px;
+}
+
+.el-aside {
+    background-color: #ffffff;
+    color: #333;
+    border-right: 1px solid #e6e6e6;
+}
+
+.el-main {
+    background-color: #f5f7fa;
+    color: #333;
+    padding: 20px;
+}
+
+/* 头部样式 */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info span {
+    margin-right: 15px;
+}
+
+.el-dropdown-link {
+    cursor: pointer;
+    color: white;
+}
+
+/* 菜单样式 */
+.el-menu-vertical {
+    height: 100%;
+    border-right: none;
+}
+
+/* 卡片样式 */
+.box-card {
+    margin-bottom: 20px;
+}
+
+.status-card {
+    margin-top: 20px;
+}
+
+/* 登录页面 */
+.login-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #409EFF;
+}
+
+/* 抢单状态 */
+.status-running {
+    color: #67C23A;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.status-stopped {
+    color: #F56C6C;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.status-info {
+    font-size: 14px;
+    color: #606266;
+}
+
+/* 用户个人信息 */
+.user-profile {
+    display: flex;
+    align-items: flex-start;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.info {
+    flex: 1;
+}
+
+.info p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+/* 关于信息 */
+.about-info p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+/* 深色主题 */
+body.dark-theme {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
+
+body.dark-theme .el-main {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
+
+body.dark-theme .el-card {
+    background-color: #2d2d2d;
+    color: #f0f0f0;
+    border: 1px solid #3e3e3e;
+}
+
+body.dark-theme .el-card__header {
+    border-bottom: 1px solid #3e3e3e;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .el-aside {
+        width: 64px !important;
+    }
+    
+    .el-main {
+        padding: 10px;
+    }
+    
+    .user-profile {
+        flex-direction: column;
+    }
+    
+    .avatar {
+        margin-bottom: 20px;
+    }
+}
+
+:root {
+    --bg-gray-100: #f3f4f6;
+    --border-gray-200: #e5e7eb;
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* 设置页面大小，确保不滚动 */
+html, body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+
+.el-card {
+    --el-card-padding: 10px !important;
+}
+
+.el-form-item--small{
+    margin-bottom: 5px !important;
+}
+.el-form-item--small .el-form-item__label{
+    line-height: 1 !important;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.bg-gray-100 {
+    background-color: var(--bg-gray-100);
+}
+
+.p2 {
+    padding: 0.5rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.border {
+    border: 1px solid var(--border-gray-200);
+}
+
+.rounded-md {
+    border-radius: 0.375rem;
+}
+
+.shadow-md {
+    box-shadow: var(--shadow-md);
+}
+
+.text-12px {
+    font-size: 12px;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+.p-2 {
+    padding: 0.5rem;
+}
+
+.box-border {
+    box-sizing: border-box;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.w-2\/5 {
+    width: 40%;
+}
+
+.pl-2 {
+    padding-left: 0.5rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.bg-gray-500 {
+    background-color: #6b7280;
+}
+
+.overflow-y-scroll {
+    overflow-y: scroll;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.block {
+    display: block;
+    width: 100%;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
