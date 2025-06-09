@@ -1,10 +1,13 @@
 name: Build Package
 
 on:
-  create:
-    tags:
-      - '*'
-jobs:    
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: # 允许手动触发工作流
+
+jobs:
   publish:
     name: Publish for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -17,20 +20,20 @@ jobs:
           # - os: macos-latest
           #   artifact_name: dist/main.zip
           #   asset_name: main-macos-amd64
-        
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-    - name: Inject slug/short variables
-      uses: rlespinasse/github-slug-action@v3.x            
-    - name: info
-      run: |
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v3.x
+      - name: info
+        run: |
           echo ${{matrix.artifact_name}}
           echo ${{matrix.os}}
           echo ${{matrix.asset_name}}-${{env.GITHUB_REF_SLUG}}.zip
-    - name: get dependencies
-      run: |
+      - name: get dependencies
+        run: |
           pip install readchar
           git clone https://github.com/pyinstaller/pyinstaller.git
           cd pyinstaller/bootloader
@@ -40,14 +43,14 @@ jobs:
           python setup.py install
           cd ..
           python -m PyInstaller main.py --hidden-import readchar -i resources/icon.ico
-    - name: Create Archive
-      uses: papeloto/action-zip@v1
-      with:
+      - name: Create Archive
+        uses: papeloto/action-zip@v1
+        with:
           dest: ${{matrix.artifact_name}}
           files: dist/main/
-    - name: Upload file
-      uses: svenstaro/upload-release-action@v2
-      with:
+      - name: Upload file
+        uses: svenstaro/upload-release-action@v2
+        with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{matrix.artifact_name}}
           asset_name: ${{format('{0}-{1}.zip',matrix.asset_name,env.GITHUB_REF_SLUG)}}
