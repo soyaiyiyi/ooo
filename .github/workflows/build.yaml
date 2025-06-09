@@ -38,8 +38,7 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          pyinstaller --noconfirm --onefile --windowed --clean --uac-admin --icon=resources/icon.ico --name "幻影" main.py
-          -F
+          pyinstaller --noconfirm --onefile --windowed --clean --uac-admin --icon=resources/icon.ico --name "幻影" main.py -F --add-data=src/frontend:src/frontend --add-data=resources:resources
 
       - name: Upload file (windows-x64-exe)
         uses: actions/upload-artifact@v4
