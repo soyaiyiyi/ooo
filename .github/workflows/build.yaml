@@ -39,7 +39,7 @@ jobs:
           cd ..
           python setup.py install
           cd ..
-          python -m PyInstaller main.py --hidden-import readchar
+          python -m PyInstaller main.py --hidden-import readchar -i resources/icon.ico
     - name: Create Archive
       uses: papeloto/action-zip@v1
       with:
